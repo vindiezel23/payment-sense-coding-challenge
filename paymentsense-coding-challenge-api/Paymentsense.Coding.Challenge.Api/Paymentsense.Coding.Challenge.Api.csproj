@@ -10,4 +10,13 @@
     <Folder Include="Services\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Services\Country.Service.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Models\Timezone.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Services\CountryService.cs" />
+  </ItemGroup>
 </Project>
