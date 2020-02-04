@@ -1,4 +1,6 @@
-﻿using Paymentsense.Coding.Challenge.Api.Models;
+﻿using Newtonsoft.Json;
+using Paymentsense.Coding.Challenge.Api.Extensions;
+using Paymentsense.Coding.Challenge.Api.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,22 +16,33 @@ namespace Paymentsense.Coding.Challenge.Api.Services
 
         public CountryService(HttpClient client)
         {
-            client.BaseAddress = new Uri("https://restcountries.eu/rest/v2");
-            client.DefaultRequestHeaders.Add("Accept",
-                "application/json");
+            client.BaseAddress = new Uri("https://restcountries.eu/rest/v2/");
+            //client.DefaultRequestHeaders.Add("Accept",
+              //  "application/json");
             Client = client;
         }
 
         public async Task<IEnumerable<Country>> GetCountries()
         {
-            var response = await Client.GetAsync(
-                "/all?fields=alpha3code;name;flag");
+            try
+            {
+                var response = await Client.GetAsync(
+                    "all?fields=alpha3Code;name;flag");
 
-            response.EnsureSuccessStatusCode();
+                if (response.IsSuccessStatusCode)
+                {
+                    return response.ContentAsType<IEnumerable<Country>>();
+                }
 
-            using var responseStream = await response.Content.ReadAsStreamAsync();
-            return await JsonSerializer.DeserializeAsync
-                <IEnumerable<Country>>(responseStream);
+                return null;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            //using var responseStream = await response.Content.ReadAsStreamAsync();
+            //return await JsonSerializer.DeserializeAsync
+                //<IEnumerable<Country>>(responseStream);
         }
 
         public async Task<CountryInfo> GetCountryInfo(string alpha3Code)
@@ -37,11 +50,12 @@ namespace Paymentsense.Coding.Challenge.Api.Services
             var response = await Client.GetAsync(
                 string.Format("https://restcountries.eu/rest/v2/alpha/{0}", alpha3Code));
 
-            response.EnsureSuccessStatusCode();
+            if (response.IsSuccessStatusCode)
+            {
+                return response.ContentAsType<CountryInfo>();
+            }
 
-            using var responseStream = await response.Content.ReadAsStreamAsync();
-            return await JsonSerializer.DeserializeAsync
-                <CountryInfo>(responseStream);
+            return null;
         }
     }
 }
