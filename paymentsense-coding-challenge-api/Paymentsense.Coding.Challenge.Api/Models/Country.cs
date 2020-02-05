@@ -10,6 +10,7 @@ namespace Paymentsense.Coding.Challenge.Api.Models
 
     public class CountryInfo : Country
     {
+        public string Capital { get; set; }
         public int Population { get; set; }
         public string[] Timezones { get; set; }
         public Currency[] Currencies { get; set; }

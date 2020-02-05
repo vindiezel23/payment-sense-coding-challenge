@@ -22,16 +22,16 @@ namespace Paymentsense.Coding.Challenge.Api.Services
             Client = client;
         }
 
-        public async Task<IEnumerable<Country>> GetCountries()
+        public async Task<IEnumerable<CountryInfo>> GetCountries()
         {
             try
             {
                 var response = await Client.GetAsync(
-                    "all?fields=alpha3Code;name;flag");
+                    "all");
 
                 if (response.IsSuccessStatusCode)
                 {
-                    return response.ContentAsType<IEnumerable<Country>>();
+                    return response.ContentAsType<IEnumerable<CountryInfo>>();
                 }
 
                 return null;
@@ -40,9 +40,6 @@ namespace Paymentsense.Coding.Challenge.Api.Services
             {
                 throw new Exception(e.Message);
             }
-            //using var responseStream = await response.Content.ReadAsStreamAsync();
-            //return await JsonSerializer.DeserializeAsync
-                //<IEnumerable<Country>>(responseStream);
         }
 
         public async Task<CountryInfo> GetCountryInfo(string alpha3Code)

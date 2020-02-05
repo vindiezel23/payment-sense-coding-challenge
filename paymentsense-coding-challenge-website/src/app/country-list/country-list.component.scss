@@ -48,3 +48,24 @@ tr.example-element-row:not(.example-expanded-row):active {
 .pad-10 {
     padding: 10px;
 }
+ul {
+    margin: 0;
+    padding: 0 0 0 15px;
+    li {
+        margin-top: 10px;
+        &:first-child {
+            margin-top:0;
+        }
+    }
+}
+.country-info-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 75%;
+  font-size: large;
+  padding: 10px 0 25px 0;
+  > div {
+
+  }
+}
