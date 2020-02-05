@@ -11,6 +11,8 @@ import { MatTableModule } from '@angular/material';
 import { MatCardModule } from '@angular/material/card';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { CountryListComponent } from './country-list/country-list.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import { CountryListComponent } from './country-list/country-list.component';
     FontAwesomeModule,
     MatTableModule,
     MatCardModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [PaymentsenseCodingChallengeApiService],
   bootstrap: [AppComponent]
