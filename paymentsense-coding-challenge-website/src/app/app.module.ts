@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatTableModule } from '@angular/material';
 import { MatCardModule } from '@angular/material/card';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { CountryListComponent } from './country-list/country-list.component';
 
 @NgModule({
@@ -23,7 +24,8 @@ import { CountryListComponent } from './country-list/country-list.component';
     HttpClientModule,
     FontAwesomeModule,
     MatTableModule,
-    MatCardModule
+    MatCardModule,
+    MatPaginatorModule
   ],
   providers: [PaymentsenseCodingChallengeApiService],
   bootstrap: [AppComponent]
