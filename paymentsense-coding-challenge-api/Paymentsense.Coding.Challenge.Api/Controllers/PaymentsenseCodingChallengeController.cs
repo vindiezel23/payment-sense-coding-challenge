@@ -18,6 +18,7 @@ namespace Paymentsense.Coding.Challenge.Api.Controllers
 
 
         [HttpGet("countries")]
+        [ResponseCache(Duration =60)]
         public async Task<IActionResult> GetCountries()
         {
             var countries = await _countryService.GetCountries();
@@ -25,6 +26,7 @@ namespace Paymentsense.Coding.Challenge.Api.Controllers
         }
 
         [HttpGet("country/{alpha3Code}")]
+        [ResponseCache(Duration = 60)]
         public async Task<IActionResult> GetCountryByCode(
                 [FromRoute] string alpha3Code
             )

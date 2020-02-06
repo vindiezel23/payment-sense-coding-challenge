@@ -21,6 +21,7 @@ namespace Paymentsense.Coding.Challenge.Api
         {
             services.AddControllers();
             services.AddHttpClient<CountryService>();
+            services.AddResponseCaching();
             services.AddHealthChecks();
             services.AddCors(options =>
             {
@@ -42,6 +43,8 @@ namespace Paymentsense.Coding.Challenge.Api
             }
 
             app.UseHttpsRedirection();
+
+            app.UseResponseCaching();
 
             app.UseCors("PaymentsenseCodingChallengeOriginPolicy");
 
